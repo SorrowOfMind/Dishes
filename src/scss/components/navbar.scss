@@ -1,0 +1,17 @@
+.navbar {
+    background-color: $main-green;
+    padding: 1.5rem 0;
+    @include box-shadow(0px, 3px, 8px, 0px, rgba(0,0,0,0.3));
+    .navbar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .logo-icon {
+        padding-right: 1rem;
+    }
+    .main-title {
+        color: #fff;
+        font-size: 3rem;
+        font-family: $font-title;
+    }
+}
