@@ -1,8 +1,13 @@
 import React from 'react';
 
+import {Navbar, DishForm} from './components/index';
+
 const App = () => {
   return (
-    <div>App</div>
+    <div className="app">
+      <Navbar />
+      <DishForm />
+    </div>
   )
 }
 
