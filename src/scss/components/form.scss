@@ -1,0 +1,70 @@
+.form-wrapper {
+    background-color: rgba(0,0,0,0.7);
+    position: relative;
+    max-width: 500px;
+    min-width: 340px;
+    width: 40%;
+    margin: 0 auto;
+    color: #fff;
+    padding: 4rem;
+    .form-title {
+        color: $main-green;
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .field-wrapper {
+        padding: 2.2rem 0;
+        position: relative;
+    }
+    .field-wrapper-inline {
+        @include flexbox(row, space-between, stretch);
+    }
+    .label, .input {
+        display: block;
+    }
+    .label {
+        color: $main-green;
+    }
+    .input, .select-input {
+        border-bottom: 2px solid #fff;
+        color: #fff;
+        width: 100%;
+        padding: 0.7rem 0;
+        font-size: 1.4rem;
+    }   
+    .select-input {
+        width: 200px;
+        option {
+            color:black;
+        }
+    }
+
+    .error {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: $error-color;
+        font-size: 1.2rem;
+    }
+
+    .prep-time-wrapper {
+        @include flexbox(row, space-between, center);
+        .prep-time-inner-wrapper {
+            width: 25%;
+            position: relative;
+            padding: 2.2rem 0;
+        }
+    }
+
+    .form-btn {
+        background-color: $main-green;
+        color: #fff;
+        width: 100%;
+        padding: 1rem 0;
+        transition: background .2s linear;
+        &:hover {
+            background-color: $secondary-green;
+        }
+    }
+}
