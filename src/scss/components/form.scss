@@ -3,25 +3,35 @@
     position: relative;
     max-width: 500px;
     min-width: 340px;
-    width: 40%;
+    width: 45%;
     margin: 0 auto;
     color: #fff;
-    padding: 4rem;
+    padding: 3rem 4rem;
     .form-title {
         color: $main-green;
-        font-size: 3rem;
+        @include fluid-font(20px, 30px);
         font-weight: bold;
         text-align: center;
+        line-height: 100%;
     }
     .field-wrapper {
         padding: 2.2rem 0;
         position: relative;
     }
+    .select-wrapper {
+        padding-top: 0;
+    }
     .field-wrapper-inline {
         @include flexbox(row, space-between, stretch);
+        padding: 0;
+        .inner-field-wrapper {
+            position: relative;
+            padding: 2.2rem 0;
+        }
     }
     .label, .input {
         display: block;
+        @include fluid-font(13px, 16px);
     }
     .label {
         color: $main-green;
@@ -34,7 +44,6 @@
         font-size: 1.4rem;
     }   
     .select-input {
-        width: 200px;
         option {
             color:black;
         }
@@ -62,6 +71,7 @@
         color: #fff;
         width: 100%;
         padding: 1rem 0;
+        margin-top: 2rem;
         transition: background .2s linear;
         &:hover {
             background-color: $secondary-green;

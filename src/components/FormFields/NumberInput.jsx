@@ -1,19 +1,13 @@
 import React from 'react'
 
-const NumberInput = ({label, id, name, handleChange, ...rest}) => {
+const NumberInput = ({placeholder, input, errorMessage}) => {
     return (
-        <div className="field-wrapper">
-            <label htmlFor={id} className="label">{label}</label>
-            <input 
-                type="number" 
-                id="slices-bread" 
-                className="input" 
-                name={name}
-                {...handleChange}
-                {...rest}
-            />
-        </div>
-    )
+        <>
+            <input type="number" className="input" {...input} placeholder={placeholder}/>
+            {errorMessage && <p className="error">{errorMessage}</p>}
+        </>
+  )
+    
 }
 
 export default NumberInput
