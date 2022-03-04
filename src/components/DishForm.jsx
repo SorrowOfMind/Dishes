@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import { motion, AnimatePresence } from "framer-motion";
 
-import {isRequired, isTimeStrValid, isHrValid,isMinSecValid, isNumberValid, isDiameterValid, isRangeValid} from '../utils/validationFns';
+import {isRequired, isTimeStrValid, isNumberValid, isDiameterValid, isRangeValid} from '../utils/validationFns';
+import { formatTime } from '../utils/formattingFns';
 import {createDish} from '../store/actions/postData';
 
 import NumberInput from './FormFields/NumberInput';
@@ -13,10 +15,21 @@ const renderTextInput = ({placeholder, input, meta}) => (<TextInput placeholder=
 const renderNumberInput = ({placeholder, input, meta}) => (<NumberInput placeholder={placeholder} input={input} errorMessage={meta.touched && meta.error}/>)
 const renderSelectInput = ({types, input, meta}) => (<SelectInput input={input} errorMessage={meta.touched && meta.error} types={types}/>)
 
-const onSubmit = (values, dispatch) => dispatch(createDish(values));
+const onSubmit = (values, dispatch) => {
+	const {prepTimeHr, prepTimeMin, prepTimeSec} = values;
+	const prepTime = formatTime(prepTimeHr, prepTimeMin, prepTimeSec);
+	dispatch(createDish(values, prepTime));
+}
 
 let DishForm = ({handleSubmit}) => {
 	const [type, setType] = useState(null);
+	// const responseErrors = useSelector(state => state.dish);
+	const response = useSelector(state => state.dish);
+
+	useEffect(() => {
+		if (response.status === 1)
+			console.log("success");
+	}, [response]);
 
 	return (
 		<div className="form-wrapper">
@@ -36,25 +49,25 @@ let DishForm = ({handleSubmit}) => {
 					<div className="prep-time-wrapper">
 						<div className="prep-time-inner-wrapper">
 							<Field 
-								name="prep-time-hr" 
+								name="prepTimeHr" 
 								component={renderTextInput}
-								validate={[isRequired, isTimeStrValid, isHrValid]}
-								placeholder="hour"
+								validate={[isRequired, isTimeStrValid]}
+								placeholder="hours"
 							/>
 						</div>:
 						<div className="prep-time-inner-wrapper">
 							<Field 
-								name="prep-time-min" 
+								name="prepTimeMin" 
 								component={renderTextInput}
-								validate={[isRequired, isTimeStrValid, isMinSecValid]}
+								validate={[isRequired, isTimeStrValid]}
 								placeholder="minutes"
 							/>
 						</div>:
 						<div className="prep-time-inner-wrapper">
 							<Field 
-								name="prep-time-sec" 
+								name="prepTimeSec" 
 								component={renderTextInput}
-								validate={[isRequired, isTimeStrValid, isMinSecValid]}
+								validate={[isRequired, isTimeStrValid]}
 								placeholder="seconds"
 							/>
 						</div>
@@ -79,7 +92,7 @@ let DishForm = ({handleSubmit}) => {
 								<div className="inner-field-wrapper">
 									<label htmlFor="num-slices-pizza" className="label">No. of slices *</label>
 									<Field
-										name="slices-pizza" 
+										name="slicesPizza" 
 										component={renderNumberInput}
 										id="num-slices-pizza"
 										validate={[isRequired, isNumberValid]}
@@ -115,7 +128,7 @@ let DishForm = ({handleSubmit}) => {
 							<div className="field-wrapper">
 								<label htmlFor="num-slices-sand" className="label">No. of slices *</label>
 								<Field
-									name="slices-sandwich" 
+									name="slicesSandwich" 
 									component={renderNumberInput}
 									id="num-slices-sand"
 									validate={[isRequired, isNumberValid]}

@@ -43,7 +43,11 @@
         width: 100%;
         padding: 0.7rem 0;
         font-size: 1.4rem;
-    }   
+        transition: border .2s;
+    }
+    .input:focus {
+        border-bottom: 2px solid $main-green;
+    }
     .select-input {
         option {
             color:black;
